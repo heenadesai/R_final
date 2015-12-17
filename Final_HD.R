@@ -1,4 +1,4 @@
-library(preprocessCore)
+
 rm(list=ls())
 graphics.off()
 
@@ -18,5 +18,14 @@ data_mat <- as.matrix(comp_data)
 is.matrix(data_mat) #checks to see if matrix is true or false <--- this results in true
 View(data_mat)
 
-summary(data_mat)
-#Normalization
+#summary(data_mat)
+
+
+#Normalization- mean centering ---- Taken from classification.R code
+norm_funct <- function(x) {
+  y <- (x - min(x)) / (max(x) - min(x))
+  return(y)
+}
+norm_data <- as.data.frame(lapply(data_mat[,2:19], norm_funct) )
+View(norm_data)
+summary(norm_data)
